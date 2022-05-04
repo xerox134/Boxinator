@@ -53,3 +53,13 @@
   align-items: center;
   list-style:none;
 }
+
+.container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.sub-container{
+  display: flex;
+  justify-content: center;
+}
