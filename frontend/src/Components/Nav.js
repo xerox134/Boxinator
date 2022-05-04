@@ -17,6 +17,7 @@ export default function Nav() {
           <Link style={navStyle} to='/Profile'><li>Profile</li></Link>
           <Link style={navStyle} to='/Login'><li>Login</li></Link>
           <Link style={navStyle} to='/Color'><li>Change Color</li></Link>
+          <Link style={navStyle} to='/Store'><li>Store</li></Link>
         </ul>
     </div>
   )
