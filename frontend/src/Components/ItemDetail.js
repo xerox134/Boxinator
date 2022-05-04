@@ -17,11 +17,24 @@ export default function Item({match}) {
 //     console.log(items.data);
 //  }
 
+const [boxes, setBoxes] = useState([{}]);
+
+  async function fetchMyThreads() {
+    const raw = await fetch(`/rest/boxes`);
+    const res = await raw.json();
+
+    setBoxes(res)
+  }
+
+  useEffect(() => {
+    fetchMyThreads();
+  }, []);
+
   return (
     <div>
 
 <h1>Item</h1>
-
+<h3>{boxes}</h3>
     </div>
 
   )
