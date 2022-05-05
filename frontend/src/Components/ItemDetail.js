@@ -20,15 +20,15 @@ export default function Item({match}) {
 
 const [boxes, setBoxes] = useState([]);
 
-  async function fetchMyThreads() {
-    const raw = await fetch(`http://localhost:8080/rest/boxes`);
-    console.log("raw", raw)
+  // async function fetchMyThreads() {
+  //   const raw = await fetch(`http://localhost:8080/rest/boxes`);
+  //   console.log("raw", raw)
 
-    const res = await raw.json();
-    console.log("raw", raw)
-    console.log("res", res)
-    setBoxes(res)
-  }
+  //   const res = await raw.json();
+  //   console.log("raw", raw)
+  //   console.log("res", res)
+  //   setBoxes(res)
+  // }
 
   const getBoxes = async () => {
 

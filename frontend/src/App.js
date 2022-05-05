@@ -6,6 +6,8 @@ import Nav from './Components/Nav';
 import Home from './Components/Home';
 import Store from './Components/Store';
 import ItemDetail from './Components/ItemDetail';
+import Boxes from './Components/Boxes';
+import Form from './Components/Form';
 import {HashRouter as Router, Routes,Route} from 'react-router-dom'
 
 
@@ -24,6 +26,8 @@ function App() {
     <Route path="/Color" element={<ChangeColor/>}/>
     <Route path="/Store" element={<Store/>}/>
     <Route path="/Store/:id" element={<ItemDetail/>}/>
+    <Route path="/Boxlist" element={<Boxes/>}/>
+    <Route path="/Boxform" element={<Form/>}/>
     </Routes>
 
       

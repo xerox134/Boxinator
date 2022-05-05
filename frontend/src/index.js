@@ -7,11 +7,13 @@ import {configureStore} from '@reduxjs/toolkit'
 import { Provider } from 'react-redux';
 import userReducer from "./features/user"
 import themeReducer from "./features/theme"
+import boxReducer from "./features/box"
 
 const store= configureStore({
   reducer:{
     user:userReducer,
-    theme:themeReducer
+    theme:themeReducer,
+    box:boxReducer,
   }
 })
 

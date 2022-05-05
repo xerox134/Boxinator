@@ -18,6 +18,8 @@ export default function Nav() {
           <Link style={navStyle} to='/Login'><li>Login</li></Link>
           <Link style={navStyle} to='/Color'><li>Change Color</li></Link>
           <Link style={navStyle} to='/Store'><li>Store</li></Link>
+          <Link style={navStyle} to='/Boxform'><li>BoxForm</li></Link>
+          <Link style={navStyle} to='/Boxlist'><li>Boxlist</li></Link>
         </ul>
     </div>
   )
