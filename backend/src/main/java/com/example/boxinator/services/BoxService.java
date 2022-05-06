@@ -5,14 +5,40 @@ import com.example.boxinator.repositories.BoxRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoxService {
     @Autowired
     private BoxRepo boxRepo;
+    private double shipping_cost;
+    private Map<String, Double> Countries = Map.of(
+            "Sweden", 1.3,
+            "Australia", 7.2,
+            "China", 4.0,
+            "Brazil", 8.6
+    );
+
+
 
     public List<Box> getAll(){
         return boxRepo.findAll();
+    }
+
+    public Box createBox(Box boxInfo) {
+        for (String i: Countries.keySet()) {
+            if (boxInfo.getCountry().equalsIgnoreCase(i)){
+                shipping_cost =boxInfo.getWeight()*Countries.get(i);
+                boxInfo.setShipping_cost( (Math.round(shipping_cost*100.0)/100.0));
+                 return boxRepo.save(boxInfo);
+            }
+
+        }
+
+        return null;
+
     }
 }

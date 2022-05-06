@@ -13,14 +13,14 @@ public class Box {
     private String box_color;
     private Integer weight;
     private String country;
-    private Integer shipping_cost;
+    private Double shipping_cost;
 
 
     public Box() {
 
     }
 
-    public Box(Long id, String name, String box_color, Integer weight, String country, Integer shipping_cost) {
+    public Box(Long id, String name, String box_color, Integer weight, String country, Double shipping_cost) {
         this.id = id;
         this.name = name;
         this.box_color = box_color;
@@ -69,11 +69,11 @@ public class Box {
         this.country = country;
     }
 
-    public Integer getShipping_cost() {
+    public Double getShipping_cost() {
         return shipping_cost;
     }
 
-    public void setShipping_cost(Integer shipping_cost) {
+    public void setShipping_cost(Double shipping_cost) {
         this.shipping_cost = shipping_cost;
     }
 
@@ -84,7 +84,7 @@ public class Box {
                 ", name='" + name + '\'' +
                 ", box_color='" + box_color + '\'' +
                 ", weight=" + weight +
-                ", Country='" + country + '\'' +
+                ", country='" + country + '\'' +
                 ", shipping_cost=" + shipping_cost +
                 '}';
     }
