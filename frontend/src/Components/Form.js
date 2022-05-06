@@ -1,20 +1,32 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import { PhotoshopPicker } from 'react-color';
+import '../App.css'
 
 export default function Form() {
 
 const {register,handleSubmit} = useForm();
 const [color,setColor]= useState('#fff')
+const [show, setShow] = useState(false);
+
 
 const onSubmit=(data)=>{
   
  data.color=color
 
- if(data.color.h>167||data.color.h>270){
+ if(data.h>167&&data.h<255){
    alert("BLUE Colors are not accepted!")
  }
   console.log(data)
+}
+
+const validateColor=(hsl,rgb)=>{
+  
+ 
+
+ if(hsl.h>167&&hsl.h<255){
+   alert("BLUE Colors are not accepted!")
+ }else{setColor(rgb)}
 }
   return (
     <div className='form-content-right'>
@@ -50,13 +62,17 @@ const onSubmit=(data)=>{
         />
 
       </div>   
-      
-      
-      <div className='form-inputs'>
+      <div className='test'>
+        <div>
         <label className='form-label'>Color</label>
-        <PhotoshopPicker  color={color} onChange={updatedColor=>setColor(updatedColor.hsl)}  />
+      <button onClick={() => setShow(prev => !prev)}>Open color picker!</button></div>
+      {show &&  
+        <PhotoshopPicker   color={color} onChange={updatedColor=>{
+        validateColor(updatedColor.hsl,updatedColor.rgb)}}  />
 
-      </div> 
+      }
+       </div>
+    
       
        <div className='form-inputs'>
         <label className='form-label'>Country</label>
