@@ -13,8 +13,9 @@ export default function Form() {
     if (data.h > 167 && data.h < 255) {
       alert("BLUE Colors are not accepted!");
     } else {
+      
+      
       data.color = `${color.r},${color.g},${color.b}`;
-
       const box = {
         name: data.name,
         country: data.country,
@@ -24,7 +25,7 @@ export default function Form() {
 
       console.log("Data to be sent:", box);
 
-      axios.post(`http://localhost:8080/rest/boxes1`, box).then((res) => {
+      axios.post(`http://localhost:8080/rest/boxes`, box).then((res) => {
         console.log(res.data);
       });
     }

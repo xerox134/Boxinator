@@ -23,10 +23,9 @@ public class BoxController {
         return boxService.getAll();
     }
 
-    @PostMapping("/rest/boxes1")
+    @PostMapping("/rest/boxes")
     @CrossOrigin(origins = "http://localhost:3000")
-    public Box createThread(@RequestBody Box boxInfo) {
-        System.out.println("test 1");
+    public List<Box> createThread(@RequestBody Box boxInfo) {
         return boxService.createBox(boxInfo);
     }
 
