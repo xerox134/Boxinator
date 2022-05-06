@@ -1,30 +1,41 @@
-import React from 'react';
-import useForm from './useForm';
-import validateInfo from './validateInfo';
+import React, {useState} from 'react';
+import {useForm} from 'react-hook-form';
+import { PhotoshopPicker } from 'react-color';
 
 export default function Form() {
 
-    const {handleChange, values, handleSubmit, errors}=useForm(validateInfo);
+const {register,handleSubmit} = useForm();
+const [color,setColor]= useState('#fff')
 
+const onSubmit=(data)=>{
+  
+ data.color=color
+
+ if(data.color.h>167||data.color.h>270){
+   alert("BLUE Colors are not accepted!")
+ }
+  console.log(data)
+}
   return (
     <div className='form-content-right'>
 
-   <form className='form' onSubmit={handleSubmit}>
-      <h1>
-        Send box
-      </h1>
+   <form className='form' onSubmit={handleSubmit(onSubmit)}>
+
+     
+
+      <h1> Send box</h1>
+
       <div className='form-inputs'>
-        <div className='form-label'>Name</div>
+        <label className='form-label'>Name</label>
+       
         <input
           className='form-input'
           type='text'
-          name='name'
           placeholder='Enter reciver name'
-          value={values.name}
-          onChange={handleChange}
+          {...register('name', { required: true })}
+       
         
         />
-        {errors.name && <p>{errors.name}</p>}
       
       </div>
       <div className='form-inputs'>
@@ -32,48 +43,57 @@ export default function Form() {
         <input
           className='form-input'
           type='number'
-          name='weight'
           placeholder='Enter the weight in Kg'
-          value={values.weight}
           min="0"
-          onChange={handleChange}
+          {...register('weight', { required: true })}
          
         />
-                {errors.weight && <p>{errors.weight}</p>}
 
-      </div>
+      </div>   
+      
+      
       <div className='form-inputs'>
-        <label className='form-label'>Password</label>
-        <input
-          className='form-input'
-          type='password'
-          name='password'
-          placeholder='Enter your password'
-          value={values.password}
-          onChange={handleChange}
-         
-        />
-                {errors.password && <p>{errors.password}</p>}
+        <label className='form-label'>Color</label>
+        <PhotoshopPicker  color={color} onChange={updatedColor=>setColor(updatedColor.hsl)}  />
+
+      </div> 
+      
+       <div className='form-inputs'>
+        <label className='form-label'>Country</label>
+        <select {...register('Country', { required: true })} >
+          <option value="Sweden">Sweden</option>
+          <option value="China">China</option>
+          <option value="Brazil">Brazil</option>
+          <option value="Australia">Australia</option>
+        </select>
 
       </div>
-      <div className='form-inputs'>
-        <label htmlFor='password2' className='form-label'>Confirm Password</label>
-        <input
-          className='form-input'
-          id='password2'
-          type='password'
-          name='password2'
-          placeholder='Confirm your password'
-          value={values.password2}
-          onChange={handleChange}
-        
-        />
-                {errors.password2 && <p>{errors.password2}</p>}
-
-      </div>
+    
       <button className='form-input-btn' type='submit'>Send</button>
     </form>
   </div>
 
 )
+
+// Conversion from rgb to hsl. My definition of blue is h in hsl between 167-270
+// Ref: https://www.30secondsofcode.org/js/s/rgb-to-hsl
+// const RGBToHSL = (r, g, b) => {
+//   r /= 255;
+//   g /= 255;
+//   b /= 255;
+//   const l = Math.max(r, g, b);
+//   const s = l - Math.min(r, g, b);
+//   const h = s
+//     ? l === r
+//       ? (g - b) / s
+//       : l === g
+//       ? 2 + (b - r) / s
+//       : 4 + (r - g) / s
+//     : 0;
+//   return [
+//     60 * h < 0 ? 60 * h + 360 : 60 * h,
+//     100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0),
+//     (100 * (2 * l - s)) / 2,
+//   ];
+// };
 }
