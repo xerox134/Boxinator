@@ -14,8 +14,7 @@ import java.util.Map;
 public class BoxService {
     @Autowired
     private BoxRepo boxRepo;
-    private double shipping_cost;
-    private Map<String, Double> Countries = Map.of(
+    private final Map<String, Double> Countries = Map.of(
             "Sweden", 1.3,
             "Australia", 7.2,
             "China", 4.0,
@@ -34,8 +33,8 @@ public class BoxService {
     public List<Box> createBox(Box boxInfo) {
         for (String i: Countries.keySet()) {
             if (boxInfo.getCountry().equalsIgnoreCase(i)){
-                shipping_cost =boxInfo.getWeight()*Countries.get(i);
-                boxInfo.setShipping_cost( (Math.round(shipping_cost*100.0)/100.0));
+                double shipping_cost = boxInfo.getWeight() * Countries.get(i);
+                boxInfo.setShipping_cost( (Math.round(shipping_cost *100.0)/100.0));
                  return boxRepo.sendBoxes(null,boxInfo.getName(),boxInfo.getBox_color(),boxInfo.getWeight(),boxInfo.getShipping_cost(),boxInfo.getCountry());
                  //Without sql query:
                 // return boxrepo.save(boxInfo)
