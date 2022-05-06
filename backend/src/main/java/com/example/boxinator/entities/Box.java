@@ -8,7 +8,6 @@ public class Box {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String box_color;
     private Integer weight;

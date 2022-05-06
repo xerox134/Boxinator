@@ -11,7 +11,7 @@ import java.util.List;
 public interface BoxRepo extends JpaRepository <Box,Long> {
 
     @Query(value = "INSERT INTO boxes VALUES (?1,?2,?3,?4,?5,?6)", nativeQuery = true)
-    List<Box> sendBoxes(Integer numb,String name,String box_color, Integer weight, Double shipping_cost,String country);
+    Box sendBox(Integer numb,String name,String box_color, Integer weight, Double shipping_cost,String country);
 
     @Query(value = "SELECT * FROM boxes", nativeQuery = true)
     List<Box> getAllBoxes();

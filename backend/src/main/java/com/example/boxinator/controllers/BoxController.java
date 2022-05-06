@@ -12,11 +12,6 @@ public class BoxController {
     @Autowired
     private BoxService boxService;
 
-    @GetMapping("/hello")
-    public String helloWorld(){
-        return "Hello World";
-    }
-
     @GetMapping("/rest/boxes")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Box> getAllBoxes(){
@@ -25,7 +20,7 @@ public class BoxController {
 
     @PostMapping("/rest/boxes")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<Box> createThread(@RequestBody Box boxInfo) {
+    public Box createBox(@RequestBody Box boxInfo) {
         return boxService.createBox(boxInfo);
     }
 

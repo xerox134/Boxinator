@@ -6,17 +6,22 @@ import "../App.css";
 
 export default function Form() {
   const { register, handleSubmit } = useForm();
-  const [color, setColor] = useState("#fff");
+  const [color, setColor] = useState("");
   const [show, setShow] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     if (data.h > 167 && data.h < 255) {
-      alert("BLUE Colors are not accepted!");
+      alert("We do not accept the color blue or any of it shades!");
     } else {
       
-      
-      data.color = `${color.r},${color.g},${color.b}`;
-      const box = {
+      if(color===""){
+        data.color = `0,0,0`;
+      }else{ 
+        data.color = `${color.r},${color.g},${color.b}`; 
+      }
+     
+     
+        const box = {
         name: data.name,
         country: data.country,
         weight: data.weight,
@@ -24,16 +29,21 @@ export default function Form() {
       };
 
       console.log("Data to be sent:", box);
-
-      axios.post(`http://localhost:8080/rest/boxes`, box).then((res) => {
-        console.log(res.data);
-      });
+      
+      try {
+       const response= await axios.post(`http://localhost:8080/rest/boxes`, box)
+       console.log("Response received", response)
+      } catch (error) {
+        console.log("Error:", error)
+        
+      }
+   
     }
   };
 
   const validateColor = (hsl, rgb) => {
     if (hsl.h > 167 && hsl.h < 255) {
-      alert("BLUE Colors are not accepted!");
+      alert("We do not accept the color blue or any of it shades!");
     } else {
       setColor(rgb);
     }

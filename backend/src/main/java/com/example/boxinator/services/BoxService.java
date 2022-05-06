@@ -5,8 +5,6 @@ import com.example.boxinator.repositories.BoxRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,12 +28,12 @@ public class BoxService {
         //return boxRepo.findAll();
     }
 
-    public List<Box> createBox(Box boxInfo) {
+    public Box createBox(Box boxInfo) {
         for (String i: Countries.keySet()) {
             if (boxInfo.getCountry().equalsIgnoreCase(i)){
                 double shipping_cost = boxInfo.getWeight() * Countries.get(i);
                 boxInfo.setShipping_cost( (Math.round(shipping_cost *100.0)/100.0));
-                 return boxRepo.sendBoxes(null,boxInfo.getName(),boxInfo.getBox_color(),boxInfo.getWeight(),boxInfo.getShipping_cost(),boxInfo.getCountry());
+                return boxRepo.sendBox(null,boxInfo.getName(),boxInfo.getBox_color(),boxInfo.getWeight(),boxInfo.getShipping_cost(),boxInfo.getCountry());
                  //Without sql query:
                 // return boxrepo.save(boxInfo)
             }
