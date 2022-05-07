@@ -5,6 +5,7 @@ import com.example.boxinator.repositories.BoxRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
 
@@ -50,4 +51,14 @@ public class BoxService {
         return null;
 
     }
+
+    public Double  getTotalSum(){
+        return boxRepo.getTotalSum();
+    }
+
+    public Double  getTotalWeight(){
+        return boxRepo.getTotalWeight();
+
+    }
+
 }

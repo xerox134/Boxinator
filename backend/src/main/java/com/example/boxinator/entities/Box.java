@@ -19,6 +19,10 @@ public class Box {
 
     }
 
+    public Box(Integer weight) {
+        this.weight = weight;
+    }
+
     public Box(Long id, String name, String box_color, Integer weight, String country, Double shipping_cost) {
         this.id = id;
         this.name = name;
