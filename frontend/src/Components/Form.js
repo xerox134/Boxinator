@@ -1,27 +1,27 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PhotoshopPicker } from "react-color";
-import axios from "axios";
 import "../App.css";
+import { postBoxes } from "../Features/boxes";
+import { useDispatch } from "react-redux";
 
 export default function Form() {
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const [color, setColor] = useState("");
   const [show, setShow] = useState(false);
 
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     if (data.h > 167 && data.h < 255) {
       alert("We do not accept the color blue or any of it shades!");
     } else {
-      
-      if(color===""){
+      if (color === "") {
         data.color = `0,0,0`;
-      }else{ 
-        data.color = `${color.r},${color.g},${color.b}`; 
+      } else {
+        data.color = `${color.r},${color.g},${color.b}`;
       }
-     
-     
-        const box = {
+
+      const box = {
         name: data.name,
         country: data.country,
         weight: data.weight,
@@ -29,15 +29,8 @@ export default function Form() {
       };
 
       console.log("Data to be sent:", box);
-      
-      try {
-       const response= await axios.post(`http://localhost:8080/rest/boxes`, box)
-       console.log("Response received", response)
-      } catch (error) {
-        console.log("Error:", error)
-        
-      }
-   
+
+      dispatch(postBoxes(box));
     }
   };
 
