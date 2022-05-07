@@ -16,6 +16,7 @@ export default function Boxes() {
 
   return (
     <div className="container">
+      <div className="sub">
       <h1>BoxList</h1>
       <h1>{boxes.status}</h1>
       <table className="sub-container">
@@ -46,6 +47,7 @@ export default function Boxes() {
         Total Weight: {boxes.totalWeight}Kg | Total Cost:{" "}
         {Math.round(boxes.totalShipping)}Kr
       </h3>
+      </div>
     </div>
   );
 }

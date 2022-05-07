@@ -4,8 +4,29 @@ body {
 .container {
   background: rgba(105, 91, 91, 0.705);
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .container h1 {
   color: black;
   text-decoration: underline;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: dotted;
+  background-color: aliceblue;
+  color: black;
+  padding: 2vh 2vw;
+}
+.sub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: dotted;
+  background-color: aliceblue;
+  color: black;
+  padding: 2vh 2vw;
 }
