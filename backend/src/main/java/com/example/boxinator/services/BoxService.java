@@ -28,12 +28,19 @@ public class BoxService {
         //return boxRepo.findAll();
     }
 
-    public Box createBox(Box boxInfo) {
+    public String createBox(Box boxInfo) {
         for (String i: Countries.keySet()) {
             if (boxInfo.getCountry().equalsIgnoreCase(i)){
                 double shipping_cost = boxInfo.getWeight() * Countries.get(i);
                 boxInfo.setShipping_cost( (Math.round(shipping_cost *100.0)/100.0));
-                return boxRepo.sendBox(null,boxInfo.getName(),boxInfo.getBox_color(),boxInfo.getWeight(),boxInfo.getShipping_cost(),boxInfo.getCountry());
+
+                try {
+                    boxRepo.sendBox(null,boxInfo.getName(),boxInfo.getBox_color(),boxInfo.getWeight(),boxInfo.getShipping_cost(),boxInfo.getCountry());
+                    return "box posted";
+                }catch (Exception e){
+                    return ("Error:" + e);
+                }
+
                  //Without sql query:
                 // return boxrepo.save(boxInfo)
             }

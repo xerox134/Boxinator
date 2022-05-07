@@ -20,7 +20,7 @@ public class BoxController {
 
     @PostMapping("/rest/boxes")
     @CrossOrigin(origins = "http://localhost:3000")
-    public Box createBox(@RequestBody Box boxInfo) {
+    public String createBox(@RequestBody Box boxInfo) {
         return boxService.createBox(boxInfo);
     }
 

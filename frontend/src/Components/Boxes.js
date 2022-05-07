@@ -1,39 +1,53 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react'
+import { useDispatch,useSelector } from 'react-redux';
 import '../App.css'
+import { changeColor, getBoxes } from '../Features/boxes';
 
 export default function Boxes() {
 
     const [boxes, setBoxes] = useState([]);
     const [weight, setWeight] = useState();
     const [sum, setSum] = useState();
+    const box=useSelector((state)=>state.boxes.value)
+
+    const dispatch = useDispatch();
 
 
 
-  const getBoxes = async () => {
-    try {
-    let response = await axios.get("http://localhost:8080/rest/boxes");
-      setBoxes(response.data);
+//   const getBoxes = async () => {
+//     try {
+//     let response = await axios.get("http://localhost:8080/rest/boxes");
+//       setBoxes(response.data);
+//     } catch (error) {
+//       console.log("Error:", error)
+//     }
+// }
 
-      const totalWeight = boxes.reduce((accumulator, object) => {
-        return accumulator + object.weight;
-      }, 0); 
-      
-      const totalSum = boxes.reduce((accumulator, object) => {
-        return accumulator + object.shipping_cost;
-      }, 0);
-      setWeight(totalWeight)
-      setSum(totalSum)
+const totalWeight= () =>{
+  const weightTotal =boxes.reduce((accumulator, object) => {
+    return accumulator + object.weight;
+  }, 0); 
+  setWeight(Math.round(weightTotal))
 
-    } catch (error) {
-      console.log("Error:", error)
-    }
 }
 
+const totalSum= () =>{
+const sum= boxes.reduce((accumulator, object) => {
+    return accumulator + object.shipping_cost;
+  }, 0);
 
+  Math.floor(sum)
+
+  setSum(Math.floor(sum))
+
+}
   useEffect(() => {
-    getBoxes()
-  }, []);
+    dispatch(getBoxes())
+    // getBoxes()
+    // totalSum()
+    // totalWeight()
+  }, [dispatch]);
 
   return (
     <div>
@@ -42,6 +56,8 @@ export default function Boxes() {
 
     <h1>BoxList</h1>
 
+    {box}
+      
     <table className='sub-container'>
       <tbody>
       <tr>
