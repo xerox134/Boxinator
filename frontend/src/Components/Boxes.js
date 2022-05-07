@@ -15,7 +15,7 @@ export default function Boxes() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="container">
       <h1>BoxList</h1>
       <h1>{boxes.status}</h1>
       <table className="sub-container">

@@ -43,6 +43,7 @@ export default function Form() {
   };
 
   return (
+    <div className="container">
     <div className="form-content-right">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <h1> Send box</h1>
@@ -98,6 +99,7 @@ export default function Form() {
           Send
         </button>
       </form>
+    </div>
     </div>
   );
 }

@@ -1,0 +1,11 @@
+body {
+  background-image: url('/src/img/boxes.jpg');
+}
+.container {
+  background: rgba(105, 91, 91, 0.705);
+  color: white;
+}
+.container h1 {
+  color: black;
+  text-decoration: underline;
+}
