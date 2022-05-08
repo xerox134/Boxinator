@@ -1,102 +1,86 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { PhotoshopPicker } from "react-color";
-import "../../App.css";
-import { postBoxes } from "../../Features/boxes";
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react'
+import FormInput from './FormInput'
+import './Form.css'
 
 export default function Form() {
-  const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
-  const [color, setColor] = useState("");
-  const [show, setShow] = useState(false);
+  const [values,setValues] = useState({
 
-  const onSubmit = async (data) => {
-    if (color === "") {
-      alert("Please pick a color!");
-    } else {
-      data.color = `${color.r},${color.g},${color.b}`;
+    reciver:"",
+    weight:"",
+    color:"",
+    country:""
 
-      const box = {
-        name: data.name,
-        country: data.country,
-        weight: data.weight,
-        box_color: data.color,
-      };
+  });
 
-      dispatch(postBoxes(box));
-      alert("Box has been sent!");
+  const inputs =[
+
+    {
+      id:1,
+      name:"reciver",
+      type:"text",
+      placeholder:"Reciver",
+      errorMessage:"Reciver should be 3-16 characters and shoudnt include any special characters or numbers",
+      label:"Reciver",
+      pattern:"^[A-Za-z]{3,16}$",
+      required:true
+    }, 
+     {
+      id:2,
+      name:"weight",
+      type:"text",
+      placeholder:"Weight",
+      errorMessage:"Weight should be positive number, and shouldnt include any special characters, (Max weight:99999kg)",
+      label:"Weight",
+      pattern:"^[1-9][0-9]{0,4}$",
+      required:true
+
+    }, 
+     {
+      id:3,
+      name:"",
+      type:"text",
+      placeholder:"Color",
+      errorMessage:"Please pick a color!",
+      label:"Color",
+      required:true
+
+    }, 
+     {
+      id:4,
+      name:"country",
+      type:"text",
+      placeholder:"Country",
+      errorMessage:"Please pick a country!",
+      label:"Country",
+      required:true
+
     }
-  };
 
-  const validateColor = (hsl, rgb) => {
-    if (hsl.h > 167 && hsl.h < 255) {
-      alert("We do not accept the color blue or any of it shades!");
-    } else {
-      setColor(rgb);
-    }
-  };
+  ]
 
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    console.log("SENDING", values)
+  }
+
+  const onChange=(e)=>{
+    console.log(e)
+    setValues({...values, [e.target.name]:e.target.value})
+  }
+
+  console.log(values)
   return (
-    <div className="container">
-      <div className="form-content-right">
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
-          <h1> Send box</h1>
+    <div className='form'>
+      <h1>Send Box</h1>
+      <form onSubmit={handleSubmit}>
 
-          <div className="form-inputs">
-            <label className="form-label">Name</label>
+      {inputs.map((input)=>(
+      <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
+      ))}
+     
+      <button>Submit</button>
+      </form>
 
-            <input
-              className="form-input"
-              type="text"
-              placeholder="Enter reciver name"
-              {...register("name", { required: true })}
-            />
-          </div>
-
-          <div className="form-inputs">
-            <label className="form-label">Weight</label>
-            <input
-              className="form-input"
-              type="number"
-              placeholder="Enter the weight in Kg"
-              min="0"
-              {...register("weight", { required: true })}
-            />
-          </div>
-
-          <div className="colorPicker">
-            <div>
-              <label className="form-label">Color</label>
-              <button type="button" onClick={() => setShow((prev) => !prev)}>
-                Open color picker!
-              </button>
-            </div>
-            {show && (
-              <PhotoshopPicker
-                color={color}
-                onChange={(updatedColor) => {
-                  validateColor(updatedColor.hsl, updatedColor.rgb);
-                }}
-              />
-            )}
-          </div>
-
-          <div className="form-inputs">
-            <label className="form-label">Country</label>
-            <select {...register("country", { required: true })}>
-              <option value="Sweden">Sweden</option>
-              <option value="China">China</option>
-              <option value="Brazil">Brazil</option>
-              <option value="Australia">Australia</option>
-            </select>
-          </div>
-
-          <button className="form-input-btn" type="submit">
-            Send
-          </button>
-        </form>
-      </div>
     </div>
-  );
+  )
 }
