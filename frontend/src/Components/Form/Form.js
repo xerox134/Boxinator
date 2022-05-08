@@ -12,14 +12,10 @@ export default function Form() {
   const [show, setShow] = useState(false);
 
   const onSubmit = async (data) => {
-    if (data.h > 167 && data.h < 255) {
-      alert("We do not accept the color blue or any of it shades!");
+    if (color === "") {
+      alert("Please pick a color!");
     } else {
-      if (color === "") {
-        data.color = `0,0,0`;
-      } else {
-        data.color = `${color.r},${color.g},${color.b}`;
-      }
+      data.color = `${color.r},${color.g},${color.b}`;
 
       const box = {
         name: data.name,
@@ -28,10 +24,8 @@ export default function Form() {
         box_color: data.color,
       };
 
-      console.log("Data to be sent:", box);
-
       dispatch(postBoxes(box));
-      alert("Box has been sent!")
+      alert("Box has been sent!");
     }
   };
 
@@ -45,62 +39,64 @@ export default function Form() {
 
   return (
     <div className="container">
-    <div className="form-content-right">
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <h1> Send box</h1>
+      <div className="form-content-right">
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+          <h1> Send box</h1>
 
-        <div className="form-inputs">
-          <label className="form-label">Name</label>
+          <div className="form-inputs">
+            <label className="form-label">Name</label>
 
-          <input
-            className="form-input"
-            type="text"
-            placeholder="Enter reciver name"
-            {...register("name", { required: true })}
-          />
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">Weight</label>
-          <input
-            className="form-input"
-            type="number"
-            placeholder="Enter the weight in Kg"
-            min="0"
-            {...register("weight", { required: true })}
-          />
-        </div>
-        <div className="colorPicker">
-          <div>
-            <label className="form-label">Color</label>
-            <button type="button" onClick={() => setShow((prev) => !prev)}>
-              Open color picker!
-            </button>
-          </div>
-          {show && (
-            <PhotoshopPicker
-              color={color}
-              onChange={(updatedColor) => {
-                validateColor(updatedColor.hsl, updatedColor.rgb);
-              }}
+            <input
+              className="form-input"
+              type="text"
+              placeholder="Enter reciver name"
+              {...register("name", { required: true })}
             />
-          )}
-        </div>
+          </div>
 
-        <div className="form-inputs">
-          <label className="form-label">Country</label>
-          <select {...register("country", { required: true })}>
-            <option value="Sweden">Sweden</option>
-            <option value="China">China</option>
-            <option value="Brazil">Brazil</option>
-            <option value="Australia">Australia</option>
-          </select>
-        </div>
+          <div className="form-inputs">
+            <label className="form-label">Weight</label>
+            <input
+              className="form-input"
+              type="number"
+              placeholder="Enter the weight in Kg"
+              min="0"
+              {...register("weight", { required: true })}
+            />
+          </div>
 
-        <button className="form-input-btn" type="submit">
-          Send
-        </button>
-      </form>
-    </div>
+          <div className="colorPicker">
+            <div>
+              <label className="form-label">Color</label>
+              <button type="button" onClick={() => setShow((prev) => !prev)}>
+                Open color picker!
+              </button>
+            </div>
+            {show && (
+              <PhotoshopPicker
+                color={color}
+                onChange={(updatedColor) => {
+                  validateColor(updatedColor.hsl, updatedColor.rgb);
+                }}
+              />
+            )}
+          </div>
+
+          <div className="form-inputs">
+            <label className="form-label">Country</label>
+            <select {...register("country", { required: true })}>
+              <option value="Sweden">Sweden</option>
+              <option value="China">China</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Australia">Australia</option>
+            </select>
+          </div>
+
+          <button className="form-input-btn" type="submit">
+            Send
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
