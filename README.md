@@ -1,4 +1,8 @@
 # Frontend
+
+### npm install
+Installs the packages.
+
 ### npm start
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in your browser.
@@ -21,6 +25,7 @@ Allows you to modify in less and update css direcly
 
 # Getting Started
 
+Import the empty database file to your database
 
 Connect to your mariaDb by changing the username, password and if needed url in 
 *src>main>resources>application.properties. 
