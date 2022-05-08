@@ -30,12 +30,12 @@ export default function Boxes() {
             {boxes.box.map((box) => (
               <tr key={box.id}>
                 <td>{box.name} </td>
-                <td>{box.weight} </td>
+                <td>{box.weight} kg </td>
                 <td
                   style={{ backgroundColor: "rgb(" + box.box_color + ")" }}
                 ></td>
                 <td>{box.country} </td>
-                <td>{box.shipping_cost} </td>
+                <td>{box.shipping_cost} kr</td>
               </tr>
             ))}
           </tbody>
