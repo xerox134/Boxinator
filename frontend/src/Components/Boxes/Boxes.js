@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBoxes, getWeight, getSum } from "../../Features/boxes";
 
 export default function Boxes() {
+  const dispatch = useDispatch();
   const boxes = useSelector((state) => state.boxes.value);
 
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getBoxes());

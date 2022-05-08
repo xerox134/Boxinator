@@ -43,14 +43,12 @@ export default function Form() {
       <div className="formContent" >
         <form  onSubmit={handleSubmit(onSubmit)}>
           <h1> Send box</h1>
-          <div>
-          <div >
-            <label>
+         
+            <label  id="Receiver">
               <h3>Name:</h3>
-            </label>
 
             <input
-              
+              aria-labelledby="Receiver"
               type="text"
               pattern="^[A-Za-z]{3,16}$"
               placeholder="Enter receiver name"
@@ -65,13 +63,13 @@ export default function Form() {
               name="name"
               render={({ message }) => <p>{message}</p>}
             />
-          </div>
+                      </label>
 
-          <div >
-            <label >
-              <h3>Weight(kg):</h3>
-            </label>
+
+            <label id="Weight" >
+              <h3>Weight kg:</h3>
             <input
+             aria-labelledby="Weight"
               name="weight"
               type="number"
             
@@ -89,11 +87,11 @@ export default function Form() {
               name="weight"
               render={({ message }) => <p>{message}</p>}
             />
-          </div>
+            </label>
 
           <div >
          
-              <label >
+              <label>
                 <h3>Color:</h3>
               </label>
               <button type="button" onClick={() => setShow((prev) => !prev)}>
@@ -110,8 +108,8 @@ export default function Form() {
             )}
           </div>
 
-          <div >
-            <label ><h3>Country</h3></label>
+          
+            <label ><h3>Country:</h3>
             <select
               {...register("country", { required: "Please pick a country!" })}
             >
@@ -126,8 +124,7 @@ export default function Form() {
               name="country"
               render={({ message }) => <p>{message}</p>}
             />
-          </div>
-          </div>
+         </label>
           <button  type="submit">
             Send
           </button>
