@@ -1,13 +1,9 @@
 import './App.css';
-import Profile from './Components/Profile';
-import Login from './Components/Login';
-import ChangeColor from './Components/ChangeColor';
-import Nav from './Components/Nav';
-import Home from './Components/Home';
-import Store from './Components/Store';
-import ItemDetail from './Components/ItemDetail';
-import Boxes from './Components/Boxes';
-import Form from './Components/Form';
+
+import Nav from './Components/Nav/Nav';
+import Home from './Components/Home/Home';
+import Boxes from './Components/Boxes/Boxes';
+import Form from './Components/Form/Form';
 import {HashRouter as Router, Routes,Route} from 'react-router-dom'
 
 
@@ -17,21 +13,15 @@ function App() {
 <Router>
 
     <div className="App">
-
     <Nav></Nav>
     <Routes>
     <Route path="/" element={<Home/>}/>
-    <Route path="/Profile" element={<Profile/>}/>
-    <Route path="/Login" element={<Login/>}/>
-    <Route path="/Color" element={<ChangeColor/>}/>
-    <Route path="/Store" element={<Store/>}/>
-    <Route path="/Store/:id" element={<ItemDetail/>}/>
     <Route path="/Boxlist" element={<Boxes/>}/>
     <Route path="/Boxform" element={<Form/>}/>
     </Routes>
 
       
-   
+   <p>Nav</p>
    
     </div>
     </Router>

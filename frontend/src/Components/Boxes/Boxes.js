@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "../App.css";
-import { getBoxes, getWeight, getSum } from "../Features/boxes";
+import "../../App.css";
+import { getBoxes, getWeight, getSum } from "../../Features/boxes";
 
 export default function Boxes() {
   const boxes = useSelector((state) => state.boxes.value);

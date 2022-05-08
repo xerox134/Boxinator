@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PhotoshopPicker } from "react-color";
-import "../App.css";
-import { postBoxes } from "../Features/boxes";
+import "../../App.css";
+import { postBoxes } from "../../Features/boxes";
 import { useDispatch } from "react-redux";
 
 export default function Form() {
@@ -31,6 +31,7 @@ export default function Form() {
       console.log("Data to be sent:", box);
 
       dispatch(postBoxes(box));
+      alert("Box has been sent!")
     }
   };
 
