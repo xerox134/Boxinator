@@ -13,7 +13,7 @@
 
 
 -- Dumpar databasstruktur för boxinator
-CREATE DATABASE IF NOT EXISTS `boxinator` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci */;
+CREATE DATABASE IF NOT EXISTS `boxinator` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `boxinator`;
 
 -- Dumpar struktur för tabell boxinator.boxes
@@ -27,8 +27,7 @@ CREATE TABLE IF NOT EXISTS `boxes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8;
 
--- Dumpar data för tabell boxinator.boxes: ~1 rows (ungefär)
-DELETE FROM `boxes`;
+-- Dumpar data för tabell boxinator.boxes: ~0 rows (ungefär)
 /*!40000 ALTER TABLE `boxes` DISABLE KEYS */;
 INSERT INTO `boxes` (`id`, `name`, `box_color`, `weight`, `shipping_cost`, `country`) VALUES
 	(133, 'Stefan', '231,18,18', 10, 13, 'Sweden');
