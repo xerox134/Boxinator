@@ -53,10 +53,10 @@ export default function Form() {
               
               type="text"
               pattern="^[A-Za-z]{3,16}$"
-              placeholder="Enter reciver name"
+              placeholder="Enter receiver name"
               {...register("name", {
                 required:
-                  "Reciver should be 3-16 characters and shoudnt include any special characters or numbers",
+                  "Receiver should be 3-16 characters and shoudnt include any special characters or numbers",
               })}
             />
 
@@ -69,7 +69,7 @@ export default function Form() {
 
           <div >
             <label >
-              <h3>Weight:</h3>
+              <h3>Weight(kg):</h3>
             </label>
             <input
               name="weight"

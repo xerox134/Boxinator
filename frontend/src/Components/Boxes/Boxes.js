@@ -21,7 +21,7 @@ export default function Boxes() {
         <table >
           <tbody>
             <tr>
-              <th>Reciver</th>
+              <th>Receiver</th>
               <th>Weight</th>
               <th>Color</th>
               <th>Country</th>
