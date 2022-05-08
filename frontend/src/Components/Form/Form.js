@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { PhotoshopPicker } from "react-color";
-import "../../App.css";
+import { SketchPicker } from "react-color";
 import { postBoxes } from "../../Features/boxes";
 import { useDispatch } from "react-redux";
+import { ErrorMessage } from "@hookform/error-message";
 
 export default function Form() {
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const {register,formState: { errors },handleSubmit} = useForm();
   const [color, setColor] = useState("");
   const [show, setShow] = useState(false);
 
@@ -38,42 +38,70 @@ export default function Form() {
   };
 
   return (
-    <div className="container">
-      <div className="form-content-right">
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+    <div className="formComponent" >
+
+      <div className="formContent" >
+        <form  onSubmit={handleSubmit(onSubmit)}>
           <h1> Send box</h1>
-
-          <div className="form-inputs">
-            <label className="form-label">Name</label>
+          <div>
+          <div >
+            <label>
+              <h3>Name:</h3>
+            </label>
 
             <input
-              className="form-input"
+              
               type="text"
+              pattern="^[A-Za-z]{3,16}$"
               placeholder="Enter reciver name"
-              {...register("name", { required: true })}
+              {...register("name", {
+                required:
+                  "Reciver should be 3-16 characters and shoudnt include any special characters or numbers",
+              })}
+            />
+
+            <ErrorMessage
+              errors={errors}
+              name="name"
+              render={({ message }) => <p>{message}</p>}
             />
           </div>
 
-          <div className="form-inputs">
-            <label className="form-label">Weight</label>
+          <div >
+            <label >
+              <h3>Weight:</h3>
+            </label>
             <input
-              className="form-input"
+              name="weight"
               type="number"
+            
               placeholder="Enter the weight in Kg"
-              min="0"
-              {...register("weight", { required: true })}
+              // pattern="^[1-9][0-9]{0,4}$"
+              min="1"
+              {...register("weight", {
+                required:
+                  "Weight should be positive number, and shouldnt include any special characters, (Max weight:99999kg)",
+              })}
+            />
+
+            <ErrorMessage
+              errors={errors}
+              name="weight"
+              render={({ message }) => <p>{message}</p>}
             />
           </div>
 
-          <div className="colorPicker">
-            <div>
-              <label className="form-label">Color</label>
+          <div >
+         
+              <label >
+                <h3>Color:</h3>
+              </label>
               <button type="button" onClick={() => setShow((prev) => !prev)}>
                 Open color picker!
               </button>
-            </div>
+            
             {show && (
-              <PhotoshopPicker
+              <SketchPicker
                 color={color}
                 onChange={(updatedColor) => {
                   validateColor(updatedColor.hsl, updatedColor.rgb);
@@ -82,17 +110,25 @@ export default function Form() {
             )}
           </div>
 
-          <div className="form-inputs">
-            <label className="form-label">Country</label>
-            <select {...register("country", { required: true })}>
+          <div >
+            <label ><h3>Country</h3></label>
+            <select
+              {...register("country", { required: "Please pick a country!" })}
+            >
               <option value="Sweden">Sweden</option>
               <option value="China">China</option>
               <option value="Brazil">Brazil</option>
               <option value="Australia">Australia</option>
             </select>
-          </div>
 
-          <button className="form-input-btn" type="submit">
+            <ErrorMessage
+              errors={errors}
+              name="country"
+              render={({ message }) => <p>{message}</p>}
+            />
+          </div>
+          </div>
+          <button  type="submit">
             Send
           </button>
         </form>

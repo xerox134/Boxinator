@@ -1,30 +1,23 @@
-import './App.css';
 
-import Nav from './Components/Nav/Nav';
-import Home from './Components/Home/Home';
-import Boxes from './Components/Boxes/Boxes';
-import Form from './Components/Form/Form';
-import {HashRouter as Router, Routes,Route} from 'react-router-dom'
-
+import Nav from "./Components/Nav/Nav";
+import Boxes from "./Components/Boxes/Boxes";
+import Form from "./Components/Form/Form";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-     
-<Router>
+    <div className="app">
 
-    <div className="App">
-    <Nav></Nav>
-    <Routes>
-    <Route path="/" element={<Home/>}/>
-    <Route path="/Boxlist" element={<Boxes/>}/>
-    <Route path="/Boxform" element={<Form/>}/>
-    </Routes>
-
-      
-   <p>Nav</p>
-   
-    </div>
+    <Router>
+        <Nav></Nav>
+        <Routes>
+          <Route path="/" element={<Form />} />
+          <Route path="/Boxlist" element={<Boxes />} />
+          <Route path="/Boxform" element={<Form />} />
+        </Routes>
     </Router>
+          </div>
+
   );
 }
 
